@@ -2,16 +2,17 @@
 Console.WriteLine("Hello, World!");
 
 
-double quoteValue = 9.95;
+double quoteValue = 10.05;
 double quoteDiv = 0.09;
-
-double startQuote =  (int)(2000 / 10.06);
-
+double startQuote =  600;//(int)(2000 / quoteValue);
 double saldo = 0.0;
+int anos = 5;
+int investimentoTotal = (int)startQuote;
 
-for (int i = 0; i < 60; i++)
+for (int i = 0; i < (12 * anos); i++)
 {
   startQuote += 100;
+  investimentoTotal += 100;
 
   var dividendos = startQuote * quoteDiv;
 
@@ -24,7 +25,7 @@ for (int i = 0; i < 60; i++)
     if (quantidadeParaCompra > 1)
       {
         startQuote += quantidadeParaCompra;
-        saldo = Math.Round(caixa - (quantidadeParaCompra * quoteValue), 2);
+        saldo = (caixa - (quantidadeParaCompra * quoteValue)).ToRound(2);
       }
     else
     {
@@ -35,6 +36,10 @@ for (int i = 0; i < 60; i++)
   else
     saldo = caixa;
 
-    System.Console.WriteLine($"MXRFF11: Quantidade de cotas: {startQuote} | Rendimento: R${Math.Round(dividendos, 2)} | Valor do Patrimônio: R$ {Math.Round(startQuote * quoteValue, 2)}"
+    System.Console.WriteLine($@"
+    Mês: {i + 1} | MXRFF11: Quantidade de cotas: {startQuote}
+    Rendimento: R${dividendos.ToRound(2)}
+    Valor do Patrimônio: R$ {(startQuote * quoteValue).ToRound(2)}
+    Investimento: R$ {(investimentoTotal * quoteValue).ToRound(2)}"
   );
 }
